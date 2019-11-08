@@ -18,6 +18,17 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<developers>
+		<developer>
+			<name>vbradara</name>
+			<email>vedran.bradara@outlook.com</email>
+		</developer>
+		<developer>
+			<name>akapitan</name>
+			<email>akapitan@mail.com</email>
+		</developer>
+	</developers>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
