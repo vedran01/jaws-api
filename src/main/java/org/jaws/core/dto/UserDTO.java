@@ -2,6 +2,7 @@ package org.jaws.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import org.jaws.core.annotation.ValidPassword;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -16,6 +17,7 @@ public class UserDTO {
   private String email;
   @NotEmpty
   private String userName;
+  @ValidPassword
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 }
