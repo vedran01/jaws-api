@@ -1,4 +1,4 @@
-package org.jaws.dto;
+package org.jaws.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

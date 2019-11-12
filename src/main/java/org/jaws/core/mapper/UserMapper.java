@@ -1,18 +1,19 @@
-package org.jaws.mapper;
+package org.jaws.core.mapper;
 
-import org.jaws.dto.UserDTO;
+import org.jaws.core.dto.UserDTO;
 import org.jaws.model.UserDO;
+
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper {
+public class UserMapper implements DataMapper<UserDO, UserDTO> {
 
-  public UserDO toDO(UserDTO userDTO){
+  public UserDO toDO(UserDTO userDTO, Object... args) {
     // TODO map DTO to DO
     return null;
   }
 
-  public UserDTO toDto(UserDO userDO){
+  public UserDTO toDTO(UserDO userDO, Object... args) {
     UserDTO userDTO = new UserDTO();
     userDTO.setUserId(userDO.getId());
     userDTO.setFirstName(userDO.getFirstName());

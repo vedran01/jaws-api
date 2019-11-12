@@ -1,14 +1,14 @@
 package org.jaws.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.jaws.dto.UserDTO;
+import org.jaws.core.dto.UserDTO;
 import org.jaws.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -24,6 +24,11 @@ public class UserController {
   @GetMapping("/{userId}")
   UserDTO findById(@PathVariable Long userId) {
     return userService.findById(userId);
+  }
+
+  @PostMapping
+  ResponseEntity<UserDTO> saveUser(@Valid @RequestBody UserDTO user){
+    return null;
   }
 
 }
