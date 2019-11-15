@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.jaws</groupId>
 	<artifactId>jaws-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>ver-0.1</version>
 	<name>jaws-api</name>
 	<description>Just another web shop</description>
 
