@@ -3,6 +3,7 @@ package org.jaws.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.jaws.core.exception.BadRequestException;
 import org.jaws.core.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -31,9 +32,15 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
   private ObjectMapper objectMapper;
 
   @ExceptionHandler(ResourceNotFoundException.class)
-  ResponseEntity<?> handeResourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
+  ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
     logger.error(e.getMessage());
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getErrorBody(e, HttpStatus.NOT_FOUND, request));
+  }
+
+  @ExceptionHandler(BadRequestException.class)
+  ResponseEntity<?> handleBadRequest(BadRequestException e, HttpServletRequest request) {
+    logger.error(e.getMessage());
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(getErrorBody(e, HttpStatus.BAD_REQUEST, request));
   }
 
   @Override

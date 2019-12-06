@@ -9,8 +9,14 @@ import org.springframework.stereotype.Component;
 public class UserMapper implements DataMapper<UserDO, UserDTO> {
 
   public UserDO toDO(UserDTO userDTO, Object... args) {
-    // TODO map DTO to DO
-    return null;
+    UserDO userDO = new UserDO();
+    userDO.setId(userDTO.getUserId());
+    userDO.setUserName(userDTO.getUserName());
+    userDO.setEmail(userDTO.getEmail());
+    userDO.setFirstName(userDTO.getFirstName());
+    userDO.setLastName(userDTO.getLastName());
+    userDO.setPassword(userDO.getPassword());
+    return userDO;
   }
 
   public UserDTO toDTO(UserDO userDO, Object... args) {
@@ -20,6 +26,7 @@ public class UserMapper implements DataMapper<UserDO, UserDTO> {
     userDTO.setLastName(userDO.getLastName());
     userDTO.setEmail(userDO.getEmail());
     userDTO.setUserName(userDO.getUserName());
+    userDTO.setPassword(userDTO.getPassword());
     return userDTO;
   }
 
