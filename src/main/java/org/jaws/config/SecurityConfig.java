@@ -1,7 +1,11 @@
 package org.jaws.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.jaws.security.JawsAuthenticationFilter;
+import org.jaws.security.JawsUserDetailsService;
 import org.passay.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -51,19 +56,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return passwordValidator;
   }
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    // TODO set with custom user details
-    super.configure(auth);
-  }
+  @Autowired
+  private JawsUserDetailsService service;
+  @Autowired
+  private ObjectMapper objectMapper;
+
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    // DISABLED SECURITY
     http
-        .csrf().disable()
-        .authorizeRequests()
-        .anyRequest()
-        .permitAll();
+        .csrf().disable();
+
+    http.addFilterAt(new JawsAuthenticationFilter(authenticationManager(), objectMapper), UsernamePasswordAuthenticationFilter.class);
   }
 }
